@@ -1,0 +1,15 @@
+{
+  "name": "tasker-lambda",
+  "version": "1.0.0",
+  "description": "A collection of lambda functions for Tasker",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "lambda",
+    "tasker",
+    "es6"
+  ],
+  "author": "Tarcio <tarcio@gmail.com>",
+  "license": "MIT"
+}
