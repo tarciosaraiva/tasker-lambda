@@ -1,22 +1,21 @@
 import AWS from 'aws-sdk'
-import { v1 } from 'node-uuid'
 
 export function handler (event, context) {
   const docClient = new AWS.DynamoDB.DocumentClient()
   const payload = {
     TableName: 'projects',
-    Item: {
-      id: v1(),
-      name: event.name,
-      due: event.due
+    Key: {
+      id: event.id
     }
   }
 
-  docClient.put(payload, (err, data) => {
+  console.log(payload)
+
+  docClient.delete(payload, (err, data) => {
     if (err) {
       context.fail(err)
     } else {
-      context.done(null, 'Added successfully.')
+      context.done(null, 'Delete successfully.')
     }
   })
 }
