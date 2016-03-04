@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "role": "projects-executor",
+    "name": "projects",
+    "region": "us-east-1"
+  },
+  "api": {
+    "id": "ktyav9x11m",
+    "module": "projects"
+  }
+}

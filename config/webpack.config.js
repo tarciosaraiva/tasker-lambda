@@ -3,28 +3,22 @@ var fs = require('fs')
 var path = require('path')
 var webpack = require('webpack')
 
-var DIST_DIR = path.join(__dirname, '../dist')
-var LAMBDAS_DIR = path.join(__dirname, '../lambdas')
+var DIST_DIR = path.join(__dirname, '../')
+var APIS_DIR = path.join(__dirname, '../apis')
 
 module.exports = {
-  entry: fs.readdirSync(LAMBDAS_DIR)
-           .filter(filename => /\.js$/.test(filename))
-           .map(filename => {
-              var entry = {};
-              entry[filename.replace('.js', '')] = path.join(__dirname, '../lambdas/', filename);
-              return entry;
-           })
-           .reduce((finalObject, entry) => Object.assign(finalObject, entry), {}),
+  entry: path.join(APIS_DIR, 'projects.js'),
   output: {
     path: DIST_DIR,
-    library: '[name]',
     libraryTarget: 'commonjs2',
-    filename: '[name].js'
+    filename: 'dist-[name].js'
   },
   externals: [
     {
-      'aws-sdk': true,
-      'node-uuid': true
+      'bluebird': true,
+      'node-uuid': true,
+      'dynamodb-doc': true,
+      'claudia-api-builder': true
     }
   ],
   target: 'node',
@@ -41,7 +35,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.NoErrorsPlugin(),
-    new webpack.optimize.DedupePlugin()
+    new webpack.NoErrorsPlugin()
   ]
 }
